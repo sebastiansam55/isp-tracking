@@ -19,18 +19,25 @@ You need to have `R` installed on your computer. Either RStudio or command line 
 
 ## Cron job
 Here is what the cron job I use looks like:
+
 `0 * * * * /usr/bin/speedtest-cli --csv >> /home/sam/speedtest.csv`
 
-The above will run once at the top of every hour. For more information on cron scheduling see https://crontab.guru/
+The above will run once at the top of every hour.
+
+For more information on cron scheduling see https://crontab.guru/
 
 ## Generating graphs
 `Rscript speedtest.r`
-That's it thats the script.
+
+That's it thats the script. 
+
+The input file it takes **HAS** to be named `speedtest.csv` and it **HAS** to be in the same directory that you are running the script in. R is weird and dumb but makes very nice graphs.
 
 You can easily import the `.csv` file and work on it in your program/language of choice.
 
 ## Output
 Here are what the current output of the graphs look like:
+
 **Ping**
 ![Ping](https://github.com/sebastiansam55/isp-tracking/raw/main/ping.png)
 
@@ -43,8 +50,8 @@ Here are what the current output of the graphs look like:
 ## Notes
 By default `speedtest-cli` saves a lot of information, like your IP address. Don't go around sharing the output file directly, either strip the private data (there's a script!) or just share the output pictures.
 
-To strip out the info (assuming RPi with basic `python`):
-`python3 stripinfo.py <input> <output> convert header`
+To strip out the info (assuming RPi with basic `python` and filenames like those in this repo):
+`python3 stripinfo.py speedtest.csv out.csv convert header`
 
 `<input>` should of course be the input file that you want stripped of information
 `<output>` should be the output file that you want the stripped data to go to.
@@ -52,4 +59,6 @@ To strip out the info (assuming RPi with basic `python`):
 Put `convert` if you want the speed measured converted from bytes (224723837.2107559) to mbps (224.7238372107559). Convert will also try and output the data without quotes when possible. 
 
 Put `header` if you want the new shorter header to be written to the top of the output file.
+
+
 
